@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"log"
 	"net/http"
 )
 
@@ -16,7 +17,7 @@ func main() {
 	r.Get("/redirect/{alias}", redirectURLHandler)
 	r.Get("/analytics/{alias}/", analyticsHandler)
 
-	http.ListenAndServe(":8080", r)
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
 func shortenURLHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Shorten URL"))
