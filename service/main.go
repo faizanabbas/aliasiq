@@ -12,10 +12,6 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, from AliasIQ."))
-	})
-
 	r.Post("/shorten", shortenURLHandler)
 	r.Get("/redirect/{alias}", redirectURLHandler)
 	r.Get("/analytics/{alias}/", analyticsHandler)
