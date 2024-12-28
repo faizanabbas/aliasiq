@@ -125,7 +125,6 @@ func TestShortenURL_DuplicateURLs(t *testing.T) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	// First request
 	w1 := httptest.NewRecorder()
 	ShortenURL(w1, req)
 
@@ -140,7 +139,6 @@ func TestShortenURL_DuplicateURLs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Second request (duplicate)
 	w2 := httptest.NewRecorder()
 	ShortenURL(w2, req)
 
@@ -154,7 +152,6 @@ func TestShortenURL_DuplicateURLs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Ensure the same alias is returned
 	if response1["shortUrl"] != response2["shortUrl"] {
 		t.Errorf("expected the same alias for duplicate URLs, got %s and %s",
 			response1["shortUrl"], response2["shortUrl"])
