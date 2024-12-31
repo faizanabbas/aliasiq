@@ -2,20 +2,21 @@ package handlers
 
 import (
 	"encoding/json"
-	gonanoid "github.com/matoous/go-nanoid/v2"
 	"net/http"
+
+	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
-type request struct {
+type ShortenRequest struct {
 	OriginalURL string `json:"originalUrl"`
 }
 
-type response struct {
+type ShortenResponse struct {
 	ShortURL string `json:"shortUrl"`
 }
 
 func ShortenURL(w http.ResponseWriter, r *http.Request) {
-	var request request
+	var request ShortenRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, "invalid request payload", http.StatusBadRequest)
 		return
@@ -29,7 +30,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: Store short alias in Redis
 
-	response := response{
+	response := ShortenResponse{
 		ShortURL: "https://localhost:8080/redirect/" + alias,
 	}
 
